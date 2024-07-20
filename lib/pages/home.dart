@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/controllers/cart_controllers.dart';
 import 'package:e_commerce_app/controllers/product_controller.dart';
-import 'package:e_commerce_app/pages/product.dart';
+import 'package:e_commerce_app/pages/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               onChanged: (value) {
                 productController.filterProducts(value);

@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'utils/bindings.dart';
 import 'pages/login_page.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,10 +18,13 @@ void main() async {
 class MyApp extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: AuthBinding(),
+      debugShowCheckedModeBanner: false,
       initialRoute: authController.user.value != null ? '/home' : '/',
       getPages: [
         GetPage(name: '/', page: () => LoginPage()),

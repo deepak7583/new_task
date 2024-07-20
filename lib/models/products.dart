@@ -4,7 +4,7 @@ class Product {
   final double price;
   final String description;
   final String image;
-  int quantity; // Added quantity field
+  int quantity;
 
   Product({
     required this.id,
@@ -12,7 +12,7 @@ class Product {
     required this.price,
     required this.description,
     required this.image,
-    this.quantity = 1, // Default quantity is 1
+    this.quantity = 1,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,6 @@ class Product {
     );
   }
 
-  // CopyWith method for immutability
   Product copyWith({
     int? id,
     String? title,
@@ -44,7 +43,6 @@ class Product {
     );
   }
 
-  // Convert Product to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

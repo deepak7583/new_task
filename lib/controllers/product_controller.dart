@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/models/products.dart';
 import 'package:e_commerce_app/services/api_services.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
@@ -11,7 +12,6 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Fetch products from API
     fetchProducts();
   }
 
@@ -22,7 +22,7 @@ class ProductController extends GetxController {
       products.assignAll(productList);
       filteredProducts.assignAll(products);
     } catch (e) {
-      print('Error fetching products: $e');
+      debugPrint('Error fetching products: $e');
     } finally {
       isLoading(false);
     }

@@ -17,7 +17,7 @@ class CartController extends GetxController {
     if (box.hasData('cartItems')) {
       var storedItems = box.read<List>('cartItems')!;
       cartItems.assignAll(
-          storedItems.map((item) => Product.fromJson(item)).toList());
+          storedItems.map((item) => Product.fromJson(Map<String, dynamic>.from(item))).toList());
       updateTotalItems();
     }
   }

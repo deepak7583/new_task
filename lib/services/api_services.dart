@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
@@ -28,42 +29,47 @@ class ApiService {
       _handleDioError(e);
       return [];
     } catch (e) {
-      debugPrint('Unexpected error: $e');
+      _handleUnexpectedError(e);
       return [];
     }
   }
 
   void _handleDioError(DioException error) {
+    String message;
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        debugPrint('Connection Timeout Exception');
+        message = 'Connection Timeout. Please try again later.';
         break;
       case DioExceptionType.sendTimeout:
-        debugPrint('Send Timeout Exception');
+        message = 'Send Timeout. Please try again later.';
         break;
       case DioExceptionType.receiveTimeout:
-        debugPrint('Receive Timeout Exception');
+        message = 'Receive Timeout. Please try again later.';
         break;
       case DioExceptionType.badResponse:
-        debugPrint(
-            'Received invalid status code: ${error.response?.statusCode}');
-        debugPrint('Error data: ${error.response?.data}');
+        message = 'Received invalid status code: ${error.response?.statusCode}';
         break;
       case DioExceptionType.cancel:
-        debugPrint('Request to API server was cancelled');
+        message = 'Request to API server was cancelled.';
         break;
       case DioExceptionType.unknown:
-        debugPrint('Unexpected error: ${error.message}');
+        message = 'Unexpected error: ${error.message}';
         break;
       case DioExceptionType.badCertificate:
-        debugPrint('Bad Certificate: ${error.message}');
+        message = 'Bad Certificate: ${error.message}';
         break;
       case DioExceptionType.connectionError:
-        debugPrint('Connection Error: ${error.message}');
+        message = 'Connection Error: ${error.message}';
         break;
       default:
-        debugPrint('Unhandled DioError: ${error.message}');
+        message = 'Unhandled error: ${error.message}';
         break;
     }
+    Get.snackbar('Error', message);
+  }
+
+  void _handleUnexpectedError(dynamic error) {
+    debugPrint('Unexpected error: $error');
+    Get.snackbar('Error', 'An unexpected error occurred. Please try again.');
   }
 }
